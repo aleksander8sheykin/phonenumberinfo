@@ -1,0 +1,38 @@
+services:
+
+    postgres:
+        container_name: postgres-phonenumberinfo
+        image: postgres:17.4-alpine3.21
+        restart: always
+        shm_size: 128mb
+        env_file:
+            - docker/postgres/.env.dev
+
+    back:
+        container_name: back-phonenumberinfo
+        build:
+            context: docker
+            dockerfile: back/Dockerfile
+        ports:
+            - "8000:80"
+        volumes:
+            - "./phonenumberinfo:/app/phonenumberinfo"
+        working_dir: /app/phonenumberinfo
+        env_file:
+            - docker/back/.env.dev
+        depends_on:
+            - postgres
+        command: sh -c "python manage.py migrate &&
+            python manage.py runserver 0.0.0.0:8000"
+
+    nginx:
+        container_name: nginx-phonenumberinfo
+        working_dir: /app
+        image: nginx:stable-alpine
+        restart: always
+        ports:
+            - "80:80"
+        volumes:
+            - ./docker/nginx/dev/:/etc/nginx/conf.d:ro
+        depends_on:
+            - back

@@ -1,0 +1,1 @@
+0 2 * * * nobody cd /app/phonenumberinfo/ && python manage.py update_registry
