@@ -1,0 +1,53 @@
+# Black section
+[tool.black]
+line-length = 100
+target-version = ['py39']
+
+[tool.coverage.run]
+omit = ['*tests*']
+
+[tool.coverage.report]
+ignore_errors = true
+
+[tool.ruff]
+exclude = [
+    ".git",
+    ".venv"
+]
+ignore = [
+    "C411", # Ignore missing imports
+    "D107", # Ignore missing docstring in a function
+    "D205", # Ignore missing blank lines around class or function docstring
+    "D212", # Ignore missing whitespace around operator
+    "D213", # Ignore missing whitespace around parentheses
+    "D400", # Ignore missing blank line before section
+    "D401", # Ignore missing first line in docstring
+    "D404", # Ignore missing documentation for a module
+    "D415", # Ignore missing blank line after last section
+    "E402", # Ignore module-level import not at the top of the file
+    "Q000", # Ignore missing quotes around docstring text
+    "INP001", # Ignore input() function used
+    "PTH", # Ignore relative import path
+    "ANN101", # Ignore missing type annotation for function or method
+    "ARG002", # Ignore missing type annotation for argument
+    "ARG005", # Ignore missing type annotation for self argument
+    "T20", # Ignore invalid escape sequence
+    "TRY003", # Ignore bare except clause
+    "TRY200", # Ignore bare raise statement
+    "TRY301", # Ignore unnecessary finally clause
+    "TRY400", # Ignore unnecessary pass in except block
+    "EM", # Ignore invalid escape sequence in string
+    "FBT", # Ignore format string contains both positional and keyword arguments
+    "BLE001", # Ignore undefined name
+    "RUF", # Ignore Ruff-specific error codes
+    "SIM105", # Ignore inconsistent return statements
+    "S110", # Ignore incorrect string formatting
+]
+line-length = 140
+select = [
+    "ALL",
+]
+target-version = "py39"
+
+[tool.ruff.mccabe]
+max-complexity = 10

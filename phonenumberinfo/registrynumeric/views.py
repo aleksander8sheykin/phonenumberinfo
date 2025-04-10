@@ -8,10 +8,9 @@ from registrynumeric.serializers import PhonenumberInfo
 
 class PhonenumberDetail(APIView):
 
-    def get(self, request, *args, **kwargs):
-        phonenumber: str = kwargs.get('phonenumber')
-        prefix = int(phonenumber[1:4])
-        number = int(phonenumber[4:])
+    def get(self, request, *args, **kwargs) -> Response:
+        prefix = int(kwargs.get('phonenumber')[1:4])
+        number = int(kwargs.get('phonenumber')[4:])
         try:
             range_one = Range.objects.get(prefix=prefix, number_from__lte=number, number_to__gte=number)
         except Range.DoesNotExist:
